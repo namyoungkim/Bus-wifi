@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Busstop</title>
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+      #panel {
+        position: absolute;
+        top: 5px;
+        left: 50%;
+        margin-left: -180px;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script>
+    var seoul = new google.maps.LatLng(37.54694, 126.978152);
+
+    var busstops = [new google.maps.LatLng(37.5633339474, 126.922371947),
+new google.maps.LatLng(37.5891572727, 127.061105182),
+new google.maps.LatLng(37.4929324286, 126.9822155),
+new google.maps.LatLng(37.5104567273, 127.089021273),
+new google.maps.LatLng(37.448464, 126.4512925),
+new google.maps.LatLng(37.4836951429, 126.908609714),
+new google.maps.LatLng(37.564205, 126.975798286),
+new google.maps.LatLng(37.56219675, 127.172598625),
+new google.maps.LatLng(37.50631225, 126.8426795),
+new google.maps.LatLng(37.5171128077, 126.925677077),
+new google.maps.LatLng(37.6312436364, 127.026697909),
+new google.maps.LatLng(37.5064631667, 127.018321833),
+new google.maps.LatLng(37.5027646667, 127.109774),
+new google.maps.LatLng(37.4762735, 126.9501635),
+new google.maps.LatLng(37.6078101429, 127.097078714),
+new google.maps.LatLng(37.5332234167, 126.968255333),
+new google.maps.LatLng(37.5747468696, 127.03301113),
+new google.maps.LatLng(37.54382975, 126.88748025),
+new google.maps.LatLng(37.64499575, 126.910492),
+new google.maps.LatLng(37.556629, 126.942651762),
+new google.maps.LatLng(37.482568, 127.03674075),
+new google.maps.LatLng(37.5506661, 126.8545726),
+new google.maps.LatLng(37.5055022857, 127.063691571),
+new google.maps.LatLng(37.5166925385, 126.895873615),
+new google.maps.LatLng(37.6023333636, 127.023270318),
+new google.maps.LatLng(37.6011546667, 126.931838),
+new google.maps.LatLng(37.65158675, 127.036482875),
+new google.maps.LatLng(37.5794265172, 126.891160862),
+new google.maps.LatLng(37.5083042857, 126.951917762),
+new google.maps.LatLng(37.4800389091, 127.128205727),
+new google.maps.LatLng(37.5765764211, 127.002554789),
+new google.maps.LatLng(37.486475125, 126.885492375),
+new google.maps.LatLng(37.5308972857, 127.120302),
+new google.maps.LatLng(37.46413625, 126.89949525),
+new google.maps.LatLng(37.521178, 126.867957286),
+new google.maps.LatLng(37.5268097, 127.030418),
+new google.maps.LatLng(37.5337978, 127.00801),
+new google.maps.LatLng(37.4847217368, 126.929872526),
+new google.maps.LatLng(37.6150452, 127.0668602),
+new google.maps.LatLng(37.56371, 126.8022225)];
+    
+    var markers = [];
+    var iterator = 0;
+
+    var map;
+
+    function initialize() {
+        var mapOptions = {
+            zoom: 11,
+            center: seoul
+        };
+
+        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+        
+    }
+
+    function drop() {
+      for (var i = 0; i < busstops.length; i++) {
+        setTimeout(function() {
+          addMarker();
+        }, i * 200);
+      }
+    }
+
+    function addMarker() {
+      markers.push(new google.maps.Marker({
+        position: busstops[iterator],
+        map: map,
+        draggable: false,
+        animation: google.maps.Animation.DROP
+      }));
+      iterator++;
+    }
+    
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+    </head>
+    <body>
+        <div id="panel" style="margin-left: -52px">
+        <button id="drop" onclick="drop()">Guess what?</button>
+        </div>
+        <div id="map-canvas"></div>
+    </body>
+</html>
+
